@@ -16,12 +16,8 @@ RUN export MIX_ENV=prod && \
     source .env && \
     mix do deps.get, distillery.release
 
-#_build/prod/rel/websocket/releases/0.1.0/websocket.tar.gz
+RUN tar -xzvf _build/prod/rel/websocket/releases/0.1.0/websocket.tar.gz
 
-COPY _build/prod/rel/websocket/releases/0.1.0/websocket.tar.gz ./
+USER root
 
-RUN tar -xzvf websocket.tar.gz
-
-USER default
-
-# CMD ./bin/websocket console
+CMD ./bin/websocket foreground
