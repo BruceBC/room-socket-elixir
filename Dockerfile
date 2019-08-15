@@ -8,16 +8,15 @@ COPY rel ./rel
 COPY config ./config
 COPY lib ./lib
 COPY priv ./priv
-COPY .env ./.env
 COPY mix.exs .
 COPY mix.lock .
 
 RUN export MIX_ENV=prod && \
-    source .env && \
     mix do deps.get, distillery.release
 
-RUN tar -xzvf _build/prod/rel/websocket/releases/0.1.0/websocket.tar.gz
+RUN tar -xzvf _build/prod/rel/websocket/releases/0.1.2/websocket.tar.gz
 
 USER root
 
-CMD ./bin/websocket foreground
+# Change MIX_ENV to prod: https://github.com/bitwalker/exrm/issues/135
+CMD MIX_ENV=prod ./bin/websocket foreground

@@ -1,0 +1,7 @@
+version: '3.7'
+
+services:
+  socket:
+    image: "brucebc/websocket:0.1.2"
+    ports:
+      - "443:443"
