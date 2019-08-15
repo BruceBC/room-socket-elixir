@@ -66,17 +66,33 @@ openssl s_client -connect www.example.com
 
 - [Use Origin Header to Secure Websockets from Middleman Attacks](http://www.christian-schneider.net/CrossSiteWebSocketHijacking.html)
 
-# Configure Envinronment
+# Docker
 
-## .env
+## Useful Docker Commands
 
-**Create a .env file as follows:**
+**Build and Run (Interactive):**
 
 ```
-export TRUSTED_ORIGIN=wss://www.example.com
+docker build -t websocket . && docker run -it websocket /bin/bash
 ```
 
-> Note: If you do not create this .env file, the application will use your computer's ip address as the default trusted origin (dev environment only)
+**Build:**
+
+```
+docker build -t websocket .
+```
+
+**Run (Interactive):**
+
+```
+docker run -it websocket /bin/bash
+```
+
+**Build and Run (Foreground/Port):**
+
+```
+docker build -t websocket . && docker run -a stdin -a stdout -i -t -p 443:443 websocket
+```
 
 
 # Production
