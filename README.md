@@ -79,4 +79,25 @@ export TRUSTED_ORIGIN=wss://www.example.com
 > Note: If you do not create this .env file, the application will use your computer's ip address as the default trusted origin (dev environment only)
 
 
+# Production
 
+> ssh root@ip-address
+
+**Run Command**
+```
+docker run -d -p 443:443 brucebc/websocket:0.1.2
+```
+
+## Connect to WebSocket
+
+**Domain:** wss://room.queuedrop.io
+
+> connect to hardware
+```JavaScript
+const websocket = new WebSocket("wss://room.queuedrop.io/hardware")
+```
+
+> connect to app
+```JavaScript
+const websocket = new WebSocket("wss://room.queuedrop.io/app")
+```
