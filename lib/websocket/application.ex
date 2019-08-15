@@ -7,22 +7,8 @@ defmodule Websocket.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
-    # Use the user's default ip for dev
-    if Mix.env() == :dev && !File.exists?(".env") do
-      require Logger
-
-      Logger.warn(
-        ".env file not found for environment :dev, using your default ip address instead."
-      )
-
-      Application.put_env(
-        :websocket,
-        :trusted_origin,
-        "wss://#{Websocket.Helpers.System.ip(:find)}"
-      )
-    else
-      IO.inspect("Using .env")
-    end
+    # TODO: Figure out how to set Mix.env when releasing using distillery
+    IO.inspect "Current Environment: #{Mix.env()}"
 
     children = [
       worker(Websocket.HardwareStore, [[]]),
