@@ -13,9 +13,7 @@ defmodule Websocket.AppHandler do
   end
 
   def websocket_init(state) do
-    trusted_origin = Application.fetch_env!(:websocket, :trusted_origin)
-
-    authenticate(trusted_origin == state.origin, state)
+    authenticate(true, state)
   end
 
   def websocket_handle({:text, json}, state) do
