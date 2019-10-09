@@ -4,6 +4,7 @@ config :websocket,
   trusted_origin: System.get_env("TRUSTED_ORIGIN")
 
 config :cowboy,
+  scheme: :https,
   https: [
     # See: http://ezgr.net/increasing-security-erlang-ssl-cowboy/
     port: 443,

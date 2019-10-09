@@ -10,13 +10,15 @@ defmodule Websocket.Application do
     # TODO: Figure out how to set Mix.env when releasing using distillery
     IO.inspect "Current Environment: #{Mix.env()}"
 
+    scheme = Application.fetch_env!(:cowboy, :scheme)
+
     children = [
       worker(Websocket.HardwareStore, [[]]),
       {Task.Supervisor, name: Websocket.TaskSupervisor},
       Plug.Cowboy.child_spec(
-        scheme: :https,
+        scheme: scheme,
         plug: Websocket.Router,
-        options: Application.fetch_env!(:cowboy, :https)
+        options: Application.fetch_env!(:cowboy, scheme)
       )
     ]
 
